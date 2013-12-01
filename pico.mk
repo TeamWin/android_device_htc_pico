@@ -269,8 +269,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false \
     ro.vold.umsdirtyratio=50 \
     persist.sys.purgeable_assets=1 \
-    ro.telephony.call_ring.delay=3000
-    ro.config.low_ram=true
+    ro.telephony.call_ring.delay=3000 \
+    ro.config.low_ram=true \
     persist.webview.provider=classic
 
 PRODUCT_AAPT_CONFIG := normal mdpi
