@@ -15,4 +15,5 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/pico.mk
+    $(LOCAL_DIR)/full_pico.mk \
+    $(LOCAL_DIR)/omni_pico.mk

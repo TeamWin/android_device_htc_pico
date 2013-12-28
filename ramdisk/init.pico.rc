@@ -286,11 +286,6 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     oneshot
     disabled
 
-# sdcard daemon
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class main
-    disabled
-
 on property:ro.fuse_sdcard=true
    start sdcard
    start fuse_sdcard0
@@ -323,6 +318,11 @@ on property:dev.zcharge=false
 service flash_recovery /system/etc/install-recovery.sh
     class main
     oneshot
+
+# sdcard daemon
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
 
 # bugreport is triggered by the KEY_VOLUMEUP and BTN_MOUSE keycodes
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport

@@ -128,7 +128,7 @@ PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \
     vendor/htc/pico/proprietary/lib/libmmparser_divxdrmlib.so:system/lib/libmmparser_divxdrmlib.so \
     vendor/htc/pico/proprietary/lib/libdivxdrmdecrypt.so:system/lib/libdivxdrmdecrypt.so
-    
+
 # Set usb type
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mass_storage,adb \
@@ -267,7 +267,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.purgeable_assets=1 \
     ro.telephony.call_ring.delay=3000 \
     ro.config.low_ram=true \
-    persist.webview.provider=classic
+    persist.webview.provider=classic \
+    debug.egl.hw=1 \
+    debug.sf.no_hw_vsync=1 \
+    ro.zygote.disable_gl_preload=true \
+    debug.hwui.render_dirty_regions=false \
+    debug.hwc.fakevsync=1
 
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
