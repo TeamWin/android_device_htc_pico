@@ -87,8 +87,6 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 # Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/htc/pico
 TARGET_KERNEL_CONFIG := pico_defconfig
-# Prebuilt kernel
-#TARGET_PREBUILT_KERNEL := device/htc/pico/prebuilt/zImage
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 24
@@ -180,8 +178,6 @@ TARGET_DISABLE_ARM_PIE := true
 BOARD_USES_QCOM_LEGACY_CAM_PARAMS := true
 BOARD_HAVE_HTC_FFC := true
 BOARD_USE_REVERSE_FFC := true
-TARGET_DISABLE_ARM_PIE := true
-USE_CAMERA_STUB := true
 
 TARGET_QCOM_DISPLAY_VARIANT := legacy
 
