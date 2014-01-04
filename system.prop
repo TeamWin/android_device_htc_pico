@@ -87,7 +87,7 @@ video.accelerate.hw=1
 debug.performance.tuning=1
 
 # Low Power Audio
-lpa.decode=false
+lpa.decode=true
 audio.decoder_override_check=true
 use.non-omx.mp3.decoder=true
 use.non-omx.aac.decoder=true
