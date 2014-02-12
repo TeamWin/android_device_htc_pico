@@ -87,10 +87,10 @@ video.accelerate.hw=1
 debug.performance.tuning=1
 
 # Low Power Audio
-lpa.decode=true
+lpa.decode=false
 audio.decoder_override_check=true
-use.non-omx.mp3.decoder=true
-use.non-omx.aac.decoder=true
+use.non-omx.mp3.decoder=false
+use.non-omx.aac.decoder=false
 
 # Media
 ro.media.enc.jpeg.quality=100
@@ -103,12 +103,13 @@ media.stagefright.enable-qcp=true
 media.stagefright.enable-meta=false
 
 # Dalvik
-dalvik.vm.heapsize=48m
+dalvik.vm.heapsize=64m
 ro.zram.default=0
 ro.sys.fw.bg_apps_limit=7
 sys.mem.max_hidden_apps=7
 dalvik.vm.checkjni=0
 dalvik.vm.checkjni=false
+#TODO: check memory usage with dalvik.vm.dexopt-data-only=0
 dalvik.vm.dexopt-data-only=1
 dalvik.vm.dexopt-flags=v=a,o=v,m=y,u=y
 dalvik.vm.execution-mode=int:jit
@@ -129,5 +130,3 @@ ro.android.secure=0
 ro.fuse_sdcard=true
 persist.sys.strictmode.visual=0
 persist.sys.strictmode.disable=1
-ro.bq.gpu_to_cpu_unsupported=true
-

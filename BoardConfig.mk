@@ -1,10 +1,11 @@
-# Copyright (C) 2011 The Android Open Source Project
+#
+# Copyright (C) 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,15 +14,57 @@
 # limitations under the License.
 #
 
+# Platform
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+TARGET_BOARD_PLATFORM := msm7x27a
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a9
+
+ARCH_ARM_HAVE_ARMV7A := true
+ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HAVE_VFP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+
+
+BOARD_PAGE_SIZE := 0x00000800
+
+
+TARGET_KERNEL_SOURCE := kernel/htc/pico
+TARGET_KERNEL_CONFIG := pico_defconfig
+TARGET_BOOTLOADER_BOARD_NAME := pico
+BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null androidboot.hardware=pico
+BOARD_KERNEL_BASE := 0x12c00000
+
+
+
+TARGET_ARCH_LOWMEM := true
+
+# Platform
+
+
+
+
+# Define QCOM_HARDWARE first
+BOARD_USES_QCOM_HARDWARE := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+
 USE_CAMERA_STUB := true
 BOARD_VENDOR := htc
 
 TARGET_SPECIFIC_HEADER_PATH := device/htc/pico/include
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 COMMON_GLOBAL_CFLAGS += -DQCOM_LEGACY_OMX
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=65
 COMMON_GLOBAL_CFLAGS += -DQCOM_ICS_COMPAT
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
@@ -30,28 +73,14 @@ COMMON_GLOBAL_CFLAGS += -DGENLOCK_IOC_DREADLOCK
 COMMON_GLOBAL_CFLAGS += -DUSE_GENLOCK
 BOARD_USE_MHEAP_SCREENSHOT := true
 COMMON_GLOBAL_CFLAGS += -DNO_TUNNEL_RECORDING
-COMMON_GLOBAL_CFLAGS += -DEGL_NEEDS_FNW
-COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
 COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_SCREENSHOT
 COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
+
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 
-# Arch related defines and optimizations
-TARGET_BOARD_PLATFORM := msm7x27a
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a9
-ARCH_ARM_HAVE_ARMV7A := true
-ARCH_ARM_HAVE_NEON := true
-ARCH_ARM_HAVE_VFP := true
-TARGET_ARCH_LOWMEM := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_BOOTLOADER_BOARD_NAME := pico
+# Camera wrapper
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
@@ -65,19 +94,14 @@ TARGET_ARCH_VARIANT_FPU := neon
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
-# Target information
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
-# Kernel
-BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null androidboot.hardware=pico
-BOARD_KERNEL_BASE := 0x12c00000
-BOARD_PAGE_SIZE := 0x00000800
 
 # Audio
-TARGET_PROVIDES_LIBAUDIO := true
-BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_QCOM_AUDIO_VARIANT := legacy
+BOARD_USES_LEGACY_ALSA_AUDIO := true
+TARGET_PROVIDES_LIBAUDIO := true
+TARGET_QCOM_TUNNEL_LPA_ENABLED := true
+BOARD_QCOM_VOIP_ENABLED := true
 
 # Fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00400000
@@ -86,9 +110,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 524288000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x09600000
 BOARD_FLASH_BLOCK_SIZE := 262144
 
-# Inline kernel building
-TARGET_KERNEL_SOURCE := kernel/htc/pico
-TARGET_KERNEL_CONFIG := pico_defconfig
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 24
@@ -132,7 +153,6 @@ COMMON_GLOBAL_CFLAGS += -DHTCLOG
 # GPS
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_GPS := true
-BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7x27a
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
@@ -153,8 +173,9 @@ TARGET_USES_OVERLAY := true
 
 BOARD_USES_PMEM_ADSP := true
 
-TARGET_USES_QCOM_BSP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
+#phuck this! we ain't using it anymore!
+#TARGET_USES_QCOM_BSP := true
+#COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
 # ION Support
 TARGET_USES_ION := true
@@ -165,7 +186,6 @@ TARGET_QCOM_MEDIA_VARIANT := legacy
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/htc/pico/recovery.fstab
-#USE_SET_METADATA := false
 SKIP_SET_METADATA := true
 
 # RIL
@@ -177,8 +197,6 @@ BOARD_NEEDS_MEMORYHEAPPMEM := true
 CAMERA_USES_SURFACEFLINGER_CLIENT_STUB := true
 TARGET_DISABLE_ARM_PIE := true
 BOARD_USES_QCOM_LEGACY_CAM_PARAMS := true
-BOARD_HAVE_HTC_FFC := true
-BOARD_USE_REVERSE_FFC := true
 
 TARGET_QCOM_DISPLAY_VARIANT := legacy
 
@@ -199,9 +217,6 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 # Custom liblights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Fonts
-SMALLER_FONT_FOOTPRINT := true
-
 # Power
 TARGET_PROVIDES_POWERHAL := true
 
@@ -213,3 +228,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 
 # Webkit
 TARGET_FORCE_CPU_UPLOAD := true
+
+# Prebuilt Chromium_org
+# Needs more reworking
+#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes

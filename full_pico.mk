@@ -1,4 +1,4 @@
-# Copyright (C) 2011 The Android Open Source Project
+# Copyright (C) 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# proprietary side of the device
-# Inherit from those products. Most specific first
-
+# Call in core
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
-
-# Install/Uninstall google apps
-# $(call inherit-product, vendor/google/gapps_armv6_tiny.mk)
-
+# Overlay
+# //TODO: Update overlay, remove unrequired packages
 DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
 
-# Graphics 
+# Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x27a \
     gralloc.msm7x27a \
@@ -34,7 +28,7 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtilerenderer \
     libqdMetaData
-    
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm7x27a \
@@ -51,10 +45,11 @@ PRODUCT_PACKAGES += \
     gps.msm7x27a \
     librpc \
     power.msm7x27a \
+    memtrack.msm7x27a \
     com.android.future.usb.accessory \
     libnetcmdiface \
     HwaSettings
-    
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm7x27a \
@@ -99,7 +94,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init.pico.rc:root/init.pico.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.pico.rc:root/ueventd.pico.rc \
     $(LOCAL_PATH)/ramdisk/init.pico.usb.rc:root/init.pico.usb.rc
-    
+
 # Camera
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/lib/hw/vendor-camera.default.so:system/lib/hw/vendor-camera.default.so \
@@ -117,7 +112,7 @@ PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/bin/mm-qcamera-daemon:system/bin/mm-qcamera-daemon \
     device/htc/pico/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/htc/pico/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
-    
+
 # OMX
 PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \
@@ -189,7 +184,7 @@ PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
     vendor/htc/pico/proprietary/lib/egl/libplayback_adreno200.so:system/lib/egl/libplayback_adreno200.so \
     vendor/htc/pico/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so 
-    
+
 # RIL
 PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/libhtc_ril.so:system/lib/libhtc_ril.so \
@@ -216,23 +211,6 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/bin/htc_ebdlogd:system/bin/htc_ebdlogd \
     device/htc/pico/prebuilt/bin/logcat2:system/bin/logcat2
 
-#disable preloading of EGL/GL drivers in Zygote at boot time
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.zygote.disable_gl_preload=true
-
-# Enable for debugging
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.debuggable=1 \
-    persist.service.adb.enable=1
-
-#Disable JIT cache
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.jit.codecachesize=0
-
-
-
-
-
 # Keylayouts
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
@@ -250,21 +228,63 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/htc/pico/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl
 
+# Skip setup wizard
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.setupwizard.enable_bypass=1 \
-    ro.telephony.call_ring.multiple=false \
-    ro.vold.umsdirtyratio=50 \
-    persist.sys.purgeable_assets=1 \
-    ro.telephony.call_ring.delay=3000 \
-    ro.config.low_ram=true \
-    persist.webview.provider=classic \
-    debug.egl.hw=1 \
+    ro.setupwizard.enable_bypass=1
+
+# Loop Ringtone
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.call_ring.multiple=false
+
+# Bitmap Hackery to *probably* free some memory
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.purgeable_assets=1
+
+# UMS Dirty Ratio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=50
+
+# Disable preloading of EGL/GL drivers in Zygote at boot time
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zygote.disable_gl_preload=true
+
+# Enable Low RAM config
+# Disable JIT cache
+# //TODO: Add optimum extraFreeKbytes values to framework-res config.xml
+# //TODO: Work on ZRAM and KSM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.low_ram=true
+    dalvik.vm.jit.codecachesize=0
+
+# Two second delay is large enough!?
+# Don't call the wrong number, if not sure :P
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.call_ring.delay=2000
+
+# If exist "Classic WebView", allow using "Classic WebView"
+# Disabled by default, i.e. use chromium by default
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.webview.provider=chromium
+
+# We don't have true hw vsync yet (TARGET_NO_HW_VSYNC).
+PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.no_hw_vsync=1 \
-    ro.zygote.disable_gl_preload=true \
-    debug.hwui.render_dirty_regions=false \
     debug.hwc.fakevsync=1
+
+# Enable hardware debugging
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.egl.hw=1
+
+# Set missing property
+PRODUCT_PROPERTY_OVERRIDES += \
+        debug.egl.recordable.rgba8888=1
 
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_TAGS += dalvik.gc.type-precise
+PRODUCT_LOCALES := en_US en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ \
+    pl_PL ja_JP zh_TW zh_CN zh_HK ru_RU ko_KR nb_NO es_US da_DK el_GR tr_TR \
+    pt_PT pt_BR rm_CH sv_SE bg_BG ca_ES en_GB fi_FI hr_HR hu_HU in_ID iw_IL \
+    lt_LT lv_LV ro_RO sk_SK sl_SI sr_RS uk_UA vi_VN tl_PH ar_EG fa_IR sw_TZ \
+    ms_MY af_ZA zu_ZA en_XA ar_XB fr_CA mn_MN hy_AM az_AZ ka_GE

@@ -158,6 +158,10 @@ on boot
     # load kineto_gan.ko
     insmod /system/lib/modules/kineto_gan.ko
 
+    # Give permissions to toggle s2w
+    chown system system /sys/android_touch/s2wswitch
+    chmod 0664 /sys/android_touch/s2wswitch
+
 on fs
 # mount mtd partitions 
 	# Mount /system rw first to give the filesystem a chance to save a checkpoint 
