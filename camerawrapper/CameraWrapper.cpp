@@ -1,11 +1,17 @@
 /*
  * Copyright (C) 2012, The CyanogenMod Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by TeamCody.
+ *
+ * Modifications Copyright (C) 2014 TeamCody
+ * Actually, I would just WTFPL(http://www.wtfpl.net/about/) this, but
+ * gotta retain the original licensing, so...
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,8 +101,9 @@ static char * camera_fixup_getparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
-    // Some QCOM related framework changes expect max-saturation, max-contrast
-    // and max-sharpness or the Camera app will crash.
+    /* Some QCOM related framework changes expect max-saturation, max-contrast
+     * and max-sharpness or the Camera app will crash.
+     */
     const char* value;
     if((value = params.get("saturation-max"))) {
         params.set("max-saturation", value);
@@ -107,6 +114,14 @@ static char * camera_fixup_getparams(int id, const char * settings)
     if((value = params.get("sharpness-max"))) {
         params.set("max-sharpness", value);
     }
+
+    /* "Disable" face detection by setting the max number of detected
+     * faces to zero. Possible as we have a camera wrapper.
+     * Other devices need to slightly modify the Camera(2) app's
+     * sources to disable face-detection.
+     */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -119,6 +134,14 @@ char * camera_fixup_setparams(int id, const char * settings)
 {
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
+
+    /* "Disable" face detection by setting the max number of detected
+     * faces to zero. Possible as we have a camera wrapper.
+     * Other devices need to slightly modify the Camera(2) app's
+     * sources to disable face-detection.
+     */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());

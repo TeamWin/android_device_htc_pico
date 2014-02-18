@@ -6,6 +6,13 @@
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
+# Per article 5 of the Apache 2.0 License, some modifications to this code
+# were made by TeamCody.
+#
+# Modifications Copyright (C) 2014 The OmniROM Project
+# Actually, I would just WTFPL(http://www.wtfpl.net/about/) this, but
+# gotta retain the original licensing, so...
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +23,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Overlay
-# //TODO: Update overlay, remove unrequired packages
 DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
 
 # Graphics
@@ -41,14 +47,14 @@ PRODUCT_PACKAGES += \
 # Other
 PRODUCT_PACKAGES += \
     dexpreopt \
+    libwebcore \
     lights.pico \
     gps.msm7x27a \
     librpc \
     power.msm7x27a \
     memtrack.msm7x27a \
     com.android.future.usb.accessory \
-    libnetcmdiface \
-    HwaSettings
+    libnetcmdiface
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -144,10 +150,9 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/firmware/fw_bcm4330_apsta_b2.bin:system/etc/firmware/fw_bcm4330_apsta_b2.bin \
     device/htc/pico/prebuilt/etc/firmware/fw_bcm4330_p2p_b2.bin:system/etc/firmware/fw_bcm4330_p2p_b2.bin \
     device/htc/pico/prebuilt/etc/dhcpd/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
-    
+
 # Audio
 PRODUCT_COPY_FILES += \
-    device/htc/pico/configs/audio_policy.conf:system/etc/audio_policy.conf \
     device/htc/pico/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
     device/htc/pico/prebuilt/etc/AudioBTID.csv:system/etc/AudioBTID.csv \
     device/htc/pico/prebuilt/etc/AudioPara4.csv:system/etc/AudioPara4.csv \
@@ -157,9 +162,6 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/lib/libaudioeq.so:system/lib/libaudioeq.so \
     device/htc/pico/prebuilt/lib/libhtc_acoustic.so:system/lib/libhtc_acoustic.so \
     device/htc/pico/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
-
-#    device/htc/pico/prebuilt/lib/libaudioalsa.so:obj/lib/libaudioalsa.so \
-#    device/htc/pico/prebuilt/lib/libaudioalsa.so:system/lib/libaudioalsa.so
 
 # Sensors
 PRODUCT_COPY_FILES += \
@@ -250,16 +252,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Enable Low RAM config
 # Disable JIT cache
-# //TODO: Add optimum extraFreeKbytes values to framework-res config.xml
-# //TODO: Work on ZRAM and KSM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.low_ram=true
     dalvik.vm.jit.codecachesize=0
 
-# Two second delay is large enough!?
-# Don't call the wrong number, if not sure :P
+# Three second delay before ringing
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.call_ring.delay=2000
+    ro.telephony.call_ring.delay=3000
 
 # If exist "Classic WebView", allow using "Classic WebView"
 # Disabled by default, i.e. use chromium by default
@@ -283,6 +282,7 @@ PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_TAGS += dalvik.gc.type-precise
+# Define locales, to lessen build size
 PRODUCT_LOCALES := en_US en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ \
     pl_PL ja_JP zh_TW zh_CN zh_HK ru_RU ko_KR nb_NO es_US da_DK el_GR tr_TR \
     pt_PT pt_BR rm_CH sv_SE bg_BG ca_ES en_GB fi_FI hr_HR hu_HU in_ID iw_IL \

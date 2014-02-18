@@ -20,6 +20,41 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
+    <!-- Device configuration setting the minfree tunable in the lowmemorykiller in the kernel.
+         A high value will cause the lowmemorykiller to fire earlier, keeping more memory
+         in the file cache and preventing I/O thrashing, but allowing fewer processes to
+         stay in memory.  A low value will keep more processes in memory but may cause
+         thrashing if set too low.  Overrides the default value chosen by ActivityManager
+         based on screen size and total memory for the largest lowmemorykiller bucket, and
+         scaled proportionally to the smaller buckets.  -1 keeps the default. -->
+    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">32768</integer>
+
+    <!-- Device configuration adjusting the minfree tunable in the lowmemorykiller in the
+         kernel.  A high value will cause the lowmemorykiller to fire earlier, keeping more
+         memory in the file cache and preventing I/O thrashing, but allowing fewer processes
+         to stay in memory.  A low value will keep more processes in memory but may cause
+         thrashing if set too low.  Directly added to the default value chosen by
+         ActivityManager based on screen size and total memory for the largest lowmemorykiller
+         bucket, and scaled proportionally to the smaller buckets. 0 keeps the default. -->
+    <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">8192</integer>
+
+    <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
+         (if it exists).  A high value will increase the amount of memory that the kernel
+         tries to keep free, reducing allocation time and causing the lowmemorykiller to kill
+         earlier.  A low value allows more memory to be used by processes but may cause more
+         allocations to block waiting on disk I/O or lowmemorykiller.  Overrides the default
+         value chosen by ActivityManager based on screen size.  0 prevents keeping any extra
+         memory over what the kernel keeps by default.  -1 keeps the default. -->
+    <integer name="config_extraFreeKbytesAbsolute">16384</integer>
+
+    <!-- Device configuration adjusting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
+         (if it exists).  0 uses the default value chosen by ActivityManager.  A positive value
+         will increase the amount of memory that the kernel tries to keep free, reducing
+         allocation time and causing the lowmemorykiller to kill earlier.  A negative value
+         allows more memory to be used by processes but may cause more allocations to block
+         waiting on disk I/O or lowmemorykiller.  Directly added to the default value chosen by
+         ActivityManager based on screen size. -->
+    <integer name="config_extraFreeKbytesAdjust">4096</integer>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
@@ -106,9 +141,6 @@
 	<item>0</item>
     </integer-array>
 
-    <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">10</integer>
-
     <!-- An Array of "[Connection name],[ConnectivityManager.TYPE_xxxx],
          [associated radio-type],[priority],[restoral-timer(ms)],[dependencyMet]  -->
     <!-- the 5th element "resore-time" indicates the number of milliseconds to delay
@@ -142,10 +174,6 @@
         <item>7</item>
     </integer-array>
 
-   <!-- Display low battery warning when battery level dips to this value.
-         Also, the battery stats are flushed to disk when we hit this level.  -->
-    <integer name="config_criticalBatteryWarningLevel">5</integer>
-
    <!-- Timeout in MS for how long you have to long-press the back key to
          kill the foreground app. -->
     <integer name="config_backKillTimeout">1200</integer>
@@ -163,21 +191,13 @@
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"eth0"</item>
     </string-array>
-    
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
     bluetooth interfaces. If the device doesn't want to support tethering over bluetooth this
     should be empty. -->
     <string-array translatable="false" name="config_tether_bluetooth_regexs">
         <item>"bt-pan"</item>
     </string-array>
-
-    <!-- Regex array of allowable upstream ifaces for tethering - for example if you want
-    tethering on a new interface called "foo2" add <item>"foo\\d"</item> to the array -->
-    <add-resource type="string" name="config_tether_upstream_regexs">
-        <string-array translatable="false" name="config_tether_upstream_regexs">
-            <item>"rmnet\\d"</item>
-        </string-array>
-    </add-resource>
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
@@ -198,7 +218,6 @@
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
-
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
@@ -216,5 +235,5 @@
          manager will disable alpha trasformation in animations where not
          strictly needed. -->
     <bool name="config_sf_limitedAlpha">true</bool>
-    
-  </resources>
+
+</resources>
