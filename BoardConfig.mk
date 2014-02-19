@@ -123,7 +123,7 @@ BOARD_BLUEDROID_VENDOR_CONF := device/htc/pico/bluetooth/vnd_pico.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/pico/bluetooth/include
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/htc/pico/egl.cfg
+BOARD_EGL_CFG := device/htc/pico/prebuilt/egl.cfg
 
 # WiFi related definitions
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -179,7 +179,7 @@ TARGET_QCOM_MEDIA_VARIANT := legacy
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/htc/pico/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/recovery.fstab
 SKIP_SET_METADATA := true
 
 # RIL
