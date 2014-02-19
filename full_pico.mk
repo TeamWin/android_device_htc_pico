@@ -96,7 +96,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_COPY_FILES += \
-    device/htc/pico/prebuilt/lib/hw/vendor-camera.default.so:system/lib/hw/vendor-camera.default.so \
+    vendor/htc/pico/proprietary/lib/hw/vendor-camera.default.so:system/lib/hw/vendor-camera.default.so \
     vendor/htc/pico/proprietary/lib/liboemcamera.so:system/lib/liboemcamera.so \
     vendor/htc/pico/proprietary/lib/libmmipl.so:system/lib/libmmipl.so \
     vendor/htc/pico/proprietary/lib/libmmjpeg.so:obj/lib/libmmjpeg.so \
@@ -152,8 +152,8 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/AudioPara4_WB.csv:system/etc/AudioPara4_WB.csv \
     device/htc/pico/prebuilt/etc/AudioPreProcess.csv:system/etc/AudioPreProcess.csv \
     device/htc/pico/prebuilt/etc/AudioFilter_HP.csv:system/etc/AudioFilter_HP.csv \
-    device/htc/pico/prebuilt/lib/libaudioeq.so:system/lib/libaudioeq.so \
-    device/htc/pico/prebuilt/lib/libhtc_acoustic.so:system/lib/libhtc_acoustic.so \
+    vendor/htc/pico/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
+    vendor/htc/pico/proprietary/lib/libhtc_acoustic.so:system/lib/libhtc_acoustic.so \
     device/htc/pico/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
 
 # Sensors
