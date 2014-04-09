@@ -98,7 +98,7 @@ PRODUCT_COPY_FILES += \
 
 # Set usb type
 ADDITIONAL_DEFAULT_PROPERTIES += \
-    persist.sys.usb.config=mass_storage,adb \
+    persist.sys.usb.config=mtp,adb \
     ro.adb.secure=0
 
 # Publish that we support the live wallpaper feature.
