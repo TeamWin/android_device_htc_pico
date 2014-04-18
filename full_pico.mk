@@ -96,6 +96,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/ueventd.pico.rc:root/ueventd.pico.rc \
     $(LOCAL_PATH)/ramdisk/init.pico.usb.rc:root/init.pico.usb.rc
 
+#media_profiles
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
+
 # Set usb type
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp,adb \
