@@ -77,7 +77,6 @@ ro.max.fling_velocity = 4000
 debug.qctwa.statusbar = 1
 debug.qctwa.preservebuf = 1
 debug.qc.hardware = true
-debug.enabletr = false
 debug.hwui.render_dirty_regions = false
 debug.hwc.dynThreshold = 1.9
 debug.fb.rgb565 = 0
@@ -87,7 +86,7 @@ video.accelerate.hw = 1
 debug.performance.tuning = 1
 
 # Low Power Audio
-lpa.decode = true
+lpa.decode = false
 audio.decoder_override_check = true
 use.non-omx.mp3.decoder = false
 use.non-omx.aac.decoder = false
@@ -95,11 +94,14 @@ use.non-omx.aac.decoder = false
 # Media
 ro.media.enc.jpeg.quality = 100
 media.stagefright.enable-player = true
-media.stagefright.enable-scan = false
+media.stagefright.enable-scan = true
 media.stagefright.enable-http = true
 media.stagefright.enable-aac = true
 media.stagefright.enable-qcp = true
 media.stagefright.enable-meta = false
+
+# UMS
+persist.sys.usb.config = mtp,adb
 
 # Dalvik
 dalvik.vm.heapsize = 64m
