@@ -15,7 +15,7 @@
     "remote":      "omnirom",
     "repository":  "android_hardware_qcom_display-legacy",
     "target_path": "hardware/qcom/display-legacy",
-    "revision":    "kitkat"
+    "revision":    "android-4.4"
   },
   {
     "remote":      "omnirom",
