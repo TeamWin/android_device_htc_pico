@@ -11,6 +11,9 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
 $(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
+# Inherit device configuration
+$(call inherit-product, device/htc/pico/full_pico.mk)
+
 # Product name
 PRODUCT_NAME := omni_pico
 PRODUCT_BRAND := htc
