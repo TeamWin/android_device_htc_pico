@@ -1,4 +1,5 @@
 # Copyright 2011 The Android Open Source Project
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),pico)
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -103,3 +104,4 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
 LOCAL_SRC_FILES    := audio_policy.conf
 include $(BUILD_PREBUILT)
+endif # TARGET_BOOTLOADER_BOARD_NAME

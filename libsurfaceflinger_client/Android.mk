@@ -1,3 +1,4 @@
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),pico)
 ifeq ($(CAMERA_USES_SURFACEFLINGER_CLIENT_STUB),true)
 
 LOCAL_PATH := $(call my-dir)
@@ -11,4 +12,5 @@ LOCAL_MODULE := libsurfaceflinger_client
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif 
+endif
+endif # TARGET_BOOTLOADER_BOARD_NAME
