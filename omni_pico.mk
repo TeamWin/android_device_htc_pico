@@ -7,13 +7,13 @@ $(call inherit-product, vendor/omni/config/gsm.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
 
-# Inherit some common cyanogenmod stuff.
+# Inherit some common stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 # Product name
 PRODUCT_NAME := omni_pico
-PRODUCT_BRAND := HTC
+PRODUCT_BRAND := htc
 PRODUCT_DEVICE := pico
 PRODUCT_MANUFACTURER := HTC
 PRODUCT_RELEASE_NAME := Explorer
