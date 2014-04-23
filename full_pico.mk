@@ -101,6 +101,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
 
+#latinime_slim
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/LatinIME_slim.apk:/system/app/LatinIME_slim.apk
+
 # Set usb type
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp,adb \

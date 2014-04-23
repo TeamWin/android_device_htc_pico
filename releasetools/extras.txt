@@ -9,6 +9,7 @@ app/Development.apk
 app/Email.apk
 app/Exchange2.apk
 app/OpenWnn.apk
+app/LatinIME.apk
 
 #wnn libs
 lib/libwnndict.so
