@@ -14,6 +14,8 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 # Inherit device configuration
 $(call inherit-product, device/htc/pico/full_pico.mk)
 
+BUILDTYPE_NIGHTLY := true
+
 # Product name
 PRODUCT_NAME := omni_pico
 PRODUCT_BRAND := htc

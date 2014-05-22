@@ -10,6 +10,7 @@ app/Email.apk
 app/Exchange2.apk
 app/OpenWnn.apk
 app/LatinIME.apk
+app/DashClock.apk
 
 #wnn libs
 lib/libwnndict.so

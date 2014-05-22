@@ -47,6 +47,7 @@ PRODUCT_PACKAGES += \
     gps.msm7x27a \
     librpc \
     power.msm7x27a \
+    libhealthd.msm7x27a \
     memtrack.msm7x27a \
     com.android.future.usb.accessory \
     libnetcmdiface
@@ -101,9 +102,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
 
-#latinime_slim
+#latinime from f_droid
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/LatinIME_slim.apk:/system/app/LatinIME_slim.apk
+    $(LOCAL_PATH)/prebuilt/com.android.inputmethod.latin_4424.apk:/system/app/com.android.inputmethod.latin_4424.apk \
+    $(LOCAL_PATH)/prebuilt/net.nurik.roman.dashclock_30.apk:/system/app/net.nurik.roman.dashclock_30.apk
 
 # Set usb type
 ADDITIONAL_DEFAULT_PROPERTIES += \
