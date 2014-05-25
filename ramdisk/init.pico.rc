@@ -148,9 +148,6 @@ on post-fs-data
     chown system vpn /dev/tun
     chmod 0770 /dev/tun
 
-    # enable the GPS
-    setprop ro.ril.def.agps.mode 2
-
     # sweep2wake toggle permissions
     chown system system /sys/android_touch/s2wswitch
     chmod 0664 /sys/android_touch/s2wswitch
