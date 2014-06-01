@@ -128,7 +128,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/pico/bluetooth/include
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 BOARD_EGL_CFG := device/htc/pico/prebuilt/egl.cfg
 USE_OPENGL_RENDERER := true
-TARGET_NO_HW_VSYNC := true
+TARGET_NO_HW_VSYNC := false
 TARGET_DOESNT_USE_FENCE_SYNC := true
 TARGET_QCOM_HDMI_OUT := false
 BOARD_USE_SKIA_LCDTEXT := true
@@ -176,6 +176,7 @@ BOARD_USES_PMEM_ADSP := true
 TARGET_USES_ION := true
 
 # Add h/w acceleration in browser
+ENABLE_WEBGL := true
 WITH_JIT := true
 ENABLE_JSC_JIT := true
 JS_ENGINE := v8

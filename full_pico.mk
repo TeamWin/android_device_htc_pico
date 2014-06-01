@@ -25,6 +25,7 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
 PRODUCT_PACKAGES += \
     copybit.msm7x27a \
     gralloc.msm7x27a \
+    hwcomposer.msm7x27a \
     libgenlock \
     liboverlay \
     libtilerenderer \
@@ -138,11 +139,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Disabled by default, i.e. use chromium by default
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.webview.provider=chromium
-
-# We don't have true hw vsync yet (TARGET_NO_HW_VSYNC).
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.no_hw_vsync=1 \
-    debug.hwc.fakevsync=1
 
 # Enable hardware debugging
 PRODUCT_PROPERTY_OVERRIDES += \
