@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res/org.omnirom.device"
+                  android:title="Cody cPanel">
+
+    <!-- Sweep2Wake -->
+
+    <PreferenceCategory android:title="Sweep2Wake" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="s2w_enabled"
+            android:summary="is disabled"
+            android:title="Sweep2Wake" />
+
+        <org.omnirom.device.SeekBarPreference
+            android:key="s2w_min_distance"
+            android:title="Minimum distance"
+            android:summary="Adjust minimum swipe distance"
+            android:max="1000"
+            settings:min="250"
+            settings:interval="10"
+            android:defaultValue="650"
+            android:dependency="s2w_enabled" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="s2s_enabled"
+            android:summary="is disabled"
+            android:title="Sweep2Sleep only"
+            android:dependency="s2w_enabled" />
+
+    </PreferenceCategory>
+
+    <!-- DoubleTap2Wake -->
+
+    <PreferenceCategory android:title="DoubleTap2Wake" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="dt2w_enabled"
+            android:summary="is disabled"
+            android:title="DoubleTap2Wake" />
+
+        <org.omnirom.device.SeekBarPreference
+            android:key="dt2w_max_timeout"
+            android:title="Adjust maximum duration"
+            android:summary="Maximum tap duration"
+            android:max="1000"
+            settings:min="0"
+            settings:interval="10"
+            android:defaultValue="400"
+            android:dependency="dt2w_enabled" />
+
+    </PreferenceCategory>
+
+    <!-- PocketMod -->
+
+    <PreferenceCategory android:title="PocketMod" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pocketmod_enabled"
+            android:summary="is disabled"
+            android:title="PocketMod" />
+
+    </PreferenceCategory>
+
+    <!-- BLN -->
+
+    <PreferenceCategory android:title="BackLightNotification" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="bln_enabled"
+            android:summary="are disabled"
+            android:title="Backlight Notification" />
+
+    </PreferenceCategory>
+
+    <!-- FastCharge -->
+
+    <PreferenceCategory android:title="FastCharge" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="fastcharge_enabled"
+            android:summary="is disabled"
+            android:title="Force fast charge" />
+
+    </PreferenceCategory>
+
+    <!-- Vibrator Intensity -->
+
+    <PreferenceCategory android:title="Vibrator" >
+        <org.omnirom.device.SeekBarPreference
+            android:key="vibrator_voltage"
+            android:title="Vibrator Voltage"
+            android:summary="in mV (def: 3000)"
+            android:max="3100"
+            settings:min="2100"
+            settings:interval="50"
+            android:defaultValue="3000" />
+
+    </PreferenceCategory>
+
+
+    <!-- Sound Boost -->
+
+    <PreferenceCategory android:title="Sound Boost" >
+        <org.omnirom.device.SeekBarPreference
+            android:key="sound_boost"
+            android:title="Volume Boost"
+            android:summary="dynamically boost all volume (def: 0)"
+            android:max="8"
+            settings:min="0"
+            settings:interval="1"
+            android:defaultValue="0" />
+
+    </PreferenceCategory>
+
+    <!-- theme -->
+
+    <PreferenceCategory android:title="Theme" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="dark_theme_enabled"
+            android:summary="is disabled"
+            android:title="Dark Theme" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
