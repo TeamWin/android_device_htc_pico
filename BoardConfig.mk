@@ -100,6 +100,10 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/recovery.fstab
 SKIP_SET_METADATA := true
 
+ifeq ($(TARGET_BUILD_VARIANT), eng)
+  BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimg.mk
+endif
+  		  
 # TWRP
 DEVICE_RESOLUTION := 320x480
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
