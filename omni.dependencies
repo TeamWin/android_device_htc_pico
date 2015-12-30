@@ -1,12 +1,6 @@
 [
   {
     "remote":      "omnirom",
-    "repository":  "android_device_htc_pico",
-    "target_path": "device/htc/pico",
-    "revision":    "android-4.4"
-  },
-  {
-    "remote":      "omnirom",
     "repository":  "android_kernel_htc_pico",
     "target_path": "kernel/htc/pico",
     "revision":    "android-4.4"
