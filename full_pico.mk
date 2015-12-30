@@ -71,8 +71,8 @@ PRODUCT_PACKAGES += \
 # Build sim toolkit
 PRODUCT_PACKAGES += \
     Stk
-    
-# Hardware properties 
+
+# Hardware properties
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
@@ -93,6 +93,7 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.pico:root/fstab.pico \
+	$(LOCAL_PATH)/ramdisk/twrp.fstab:root/etc/twrp.fstab \
     $(LOCAL_PATH)/ramdisk/init.pico.rc:root/init.pico.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.pico.rc:root/ueventd.pico.rc \
     $(LOCAL_PATH)/ramdisk/init.pico.usb.rc:root/init.pico.usb.rc
@@ -123,7 +124,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES += \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml 
+    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 # UMS Dirty Ratio
 PRODUCT_PROPERTY_OVERRIDES += \

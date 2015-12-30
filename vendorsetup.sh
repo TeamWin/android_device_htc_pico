@@ -22,3 +22,4 @@
 
 add_lunch_combo omni_pico-eng
 add_lunch_combo omni_pico-userdebug
+add_lunch_combo omni_pico-user
