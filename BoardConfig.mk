@@ -100,7 +100,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/recovery.fstab
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
-  BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimg.mk
+  BOARD_CUSTOM_BOOTIMG_MK := device/htc/pico/customrecoveryimage.mk
 endif
   		  
 # TWRP
@@ -110,6 +110,8 @@ TW_NEVER_UMOUNT_SYSTEM := false
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TW_TARGET_USES_QCOM_BSP := true
 TARGET_RECOVERY_INITRC := device/htc/pico/ramdisk/recovery/init.rc
+TARGET_USERIMAGES_USE_F2FS := true
+TW_NO_EXFAT := true
 
 # RIL
 BOARD_USE_NEW_LIBRIL_HTC := true

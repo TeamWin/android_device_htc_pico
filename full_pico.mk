@@ -16,7 +16,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Call in vendor
-$(call inherit-product, vendor/htc/pico/vendor_pico.mk)
+$(call inherit-product-if-exists, vendor/htc/pico/vendor_pico.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
@@ -93,7 +93,7 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.pico:root/fstab.pico \
-    $(LOCAL_PATH)/ramdisk/recovery/twrp.fstab:root/etc/twrp.fstab \
+    $(LOCAL_PATH)/ramdisk/twrp.fstab:root/etc/twrp.fstab \
     $(LOCAL_PATH)/ramdisk/init.pico.rc:root/init.pico.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.pico.rc:root/ueventd.pico.rc \
     $(LOCAL_PATH)/ramdisk/init.pico.usb.rc:root/init.pico.usb.rc
