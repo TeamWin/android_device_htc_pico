@@ -17,6 +17,8 @@ on fs
     mount yaffs2 mtd@system /system ro remount
     mount ext4 /dev/block/mmcblk0p2 /data nosuid nodev noatime nodiratime barrier=0 data=ordered commit=15 noauto_da_alloc nouser_xattr errors=continue
     mount ext4 /dev/block/mmcblk0p3 /data nosuid nodev noatime nodiratime barrier=0 data=ordered commit=15 noauto_da_alloc nouser_xattr errors=continue
+	#nano and parted inclusion hack
+	exec system/bin/pathhack
     # mount partitions
     mount_all /fstab.pico
     #zRAM
