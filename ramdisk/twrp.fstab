@@ -7,5 +7,5 @@
 /recovery   mtd         recovery
 /sdcard     vfat        /dev/block/mmcblk0p1        /dev/block/mmcblk0
 /system     yaffs2      system
-/sd-ext     yaffs2      userdata
+/sd-ext     yaffs2      userdata	flags=display="NAND userdata partition(Obsoleted)";wipeingui
 /devlog     mtd         devlog
