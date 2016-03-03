@@ -3,7 +3,7 @@
     "remote":      "github",
     "repository":  "MSF-Jarvis/android_kernel_htc_pico",
     "target_path": "kernel/htc/pico",
-    "revision":    "android-4.4"
+    "revision":    "cm-12.1"
   },
   {
     "remote":      "omnirom",
