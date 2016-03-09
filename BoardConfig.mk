@@ -100,7 +100,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/twrp.fstab
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
-  BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/customrecoveryimg.mk
+  BOARD_CUSTOM_BOOTIMG_MK := device/htc/pico/customrecoveryimg.mk
 endif
 
 # TWRP
