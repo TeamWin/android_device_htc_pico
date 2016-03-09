@@ -16,7 +16,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Call in vendor
-$(call inherit-product, vendor/htc/pico/vendor_pico.mk)
+$(call inherit-product-if-exists, vendor/htc/pico/vendor_pico.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
