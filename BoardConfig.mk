@@ -97,7 +97,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_stora
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/htc/pico/ramdisk/recovery/twrp.fstab
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
   BOARD_CUSTOM_BOOTIMG_MK := device/htc/pico/customrecoveryimg.mk
@@ -111,7 +111,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_INITRC := device/htc/pico/ramdisk/recovery/init.rc
 TARGET_USERIMAGES_USES_F2FS := true
 TARGET_USERIMAGES_USES_EXT4 := false
-TW_USE_EXFAT := false
+TW_NO_EXFAT := true
 
 # RIL
 BOARD_USE_NEW_LIBRIL_HTC := true
