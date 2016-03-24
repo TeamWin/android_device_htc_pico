@@ -1,29 +1,17 @@
-LZMA_BIN := /usr/bin/lzma
-
-CL_GRN="\033[32m"
-PRT_INS := $(CL_GRN)
-PRT_IMG := $(CL_GRN)
-CL_RST="\033[0m"
-
-
-$(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) \
-        $(recovery_uncompressed_ramdisk) \
-		$(recovery_ramdisk) \
-		$(recovery_kernel)
-	@echo -e ${PRT_IMG}"----- Compressing recovery ramdisk with lzma ------"${CL_RST}
-	if [ -e $(recovery_uncompressed_ramdisk).lzma ] ;\
-	then \
-		rm $(recovery_uncompressed_ramdisk).lzma ; \
-	fi;
-	$(LZMA_BIN) $(recovery_uncompressed_ramdisk)
-	$(hide) cp $(recovery_uncompressed_ramdisk).lzma $(recovery_ramdisk)
-	@echo -e ${PRT_IMG}"----- Making recovery image ------"${CL_RST}
-	$(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) --output $@
-	$(hide) $(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE),raw)
-	@echo -e ${PRT_IMG}"----- Made recovery image: $@ --------"${CL_RST}
-
-
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
-	$(call pretty,"Target boot image: $@")
-	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) --output $@
-	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
+BUILT_RAMDISK_CPIO := $(PRODUCT_OUT)/ramdisk-recovery.cpio
+COMPRESS_COMMAND :=  xz --check=crc32 --lzma2=dict=2MiB
+KERNEL := $(PRODUCT_OUT)/kernel
+INSTALLED_RECOVERYIMAGE_TARGET := $(PRODUCT_OUT)/recovery.img
+$(INSTALLED_RECOVERYIMAGE_TARGET): $(recovery_ramdisk)
+	@echo "------- Compressing recovery ramdisk -------"
+	$(hide) $(COMPRESS_COMMAND) "$(BUILT_RAMDISK_CPIO)"
+	@echo "------- Making recovery image -------"
+	$(hide) $(MKBOOTIMG) \
+		--kernel $(KERNEL) \
+		--ramdisk $(BUILT_RAMDISK_CPIO).xz \
+		--cmdline "$(BOARD_KERNEL_CMDLINE)" \
+		--base $(BOARD_KERNEL_BASE) \
+		--pagesize $(BOARD_KERNEL_PAGESIZE) \
+		$(BOARD_MKBOOTIMG_ARGS) \
+		-o $(INSTALLED_RECOVERYIMAGE_TARGET)
+	@echo "------- Made recovery image: $@ -------"
