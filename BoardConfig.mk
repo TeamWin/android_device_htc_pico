@@ -46,7 +46,6 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 BOARD_CUSTOM_BOOTIMG_MK := $(device/htc/pico)/customrecoveryimg.mk
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_DISABLE_TTF := true
 TW_NEVER_UMOUNT_SYSTEM := true
 TW_TARGET_USES_QCOM_BSP := true
 TARGET_RECOVERY_INITRC := device/htc/pico/rootdir/recovery/init.rc
