@@ -21,4 +21,3 @@
 # function: add_lunch_combo generic-eng
 
 add_lunch_combo cm_pico-eng
-add_lunch_combo cm_pico-userdebug
