@@ -28,6 +28,7 @@ TARGET_BOOTLOADER_BOARD_NAME := pico
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null androidboot.hardware=pico androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x12c00000
 BOARD_PAGE_SIZE := 0x00000800
+TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/pico/rootdir/recovery/kernel
 
 # Fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00400000
@@ -37,8 +38,8 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x09600000
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # Inline kernel building
-TARGET_KERNEL_SOURCE := kernel/htc/pico
-TARGET_KERNEL_CONFIG := pico_defconfig
+#TARGET_KERNEL_SOURCE := kernel/htc/pico
+#TARGET_KERNEL_CONFIG := pico_defconfig
 
 # TWRP
 TW_THEME := portrait_mdpi
