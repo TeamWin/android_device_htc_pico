@@ -54,3 +54,4 @@ TARGET_RECOVERY_FSTAB := device/htc/pico/rootdir/recovery/twrp.fstab
 TARGET_USERIMAGES_USE_YAFFS2 := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TW_EXTRA_LANGUAGES := false
