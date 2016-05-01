@@ -27,3 +27,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp \
     persist.service.adb.enable=1 \
     ro.adb.secure=0
+
+PRODUCT_COPY_FILES += \
+	device/htc/pico/rootdir/recovery/kernel:kernel
